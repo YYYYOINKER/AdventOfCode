@@ -1,0 +1,30 @@
+FILE *file = fopen(filename, "r");
+
+if (file == NULL) {
+  perror("Error opening file");
+  return EXIT_FAILURE;
+}
+
+// Move to the end of the file to determine file size
+fseek(file, 0, SEEK_END);
+long fileSize = ftell(file);
+rewind(file);
+
+char *buffer = malloc(fileSize + 1);
+
+if (buffer == NULL) {
+  perror("Memory error");
+  fclose(file);
+  return EXIT_FAILURE;
+}
+
+// Read file into the buffer
+size_t bytesRead = fread(buffer, 1, fileSize, file);
+if (bytesRead != fileSize) {
+  perror("Error reading file");
+  free(buffer);
+  fclose(file);
+  return EXIT_FAILURE;
+}
+buffer[fileSize] = '\0';  // Null-terminate the string
+char ch = buffer[i];
