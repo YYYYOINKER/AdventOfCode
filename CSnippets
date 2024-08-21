@@ -27,4 +27,6 @@ if (bytesRead != fileSize) {
   return EXIT_FAILURE;
 }
 buffer[fileSize] = '\0';  // Null-terminate the string
+
+// Inside for loop
 char ch = buffer[i];
